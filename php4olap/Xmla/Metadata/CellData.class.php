@@ -1,0 +1,78 @@
+<?php 
+
+/*
+* This file is part of php4olap.
+*
+* (c) Julien Jacottet <jjacottet@gmail.com>
+*
+* For the full copyright and license information, please view the LICENSE
+* file that was distributed with this source code.
+*/
+
+namespace php4olap\Xmla\Metadata;
+
+use php4olap\Xmla\Metadata\MetadataBase;
+
+/**
+*	CellData
+*
+*	@package Xmla
+*	@subpackage Metadata
+*  	@author Julien Jacottet <jjacottet@gmail.com>
+*/
+
+class CellData
+{
+
+	protected $value;
+	protected $formatedValue;
+	protected $formatString;
+
+    /**
+     * Return cell value
+     *
+     * @return float Cell value
+     *
+     */	
+	public function getValue()
+	{
+		return $this->value;
+	}	
+
+    /**
+     * Return formated value
+     *
+     * @return String Cell formated value
+     *
+     */	
+	public function getFormatedValue()
+	{
+		return $this->formatedValue;
+	}
+	
+    /**
+     * Return format
+     *
+     * @return String Cell format
+     *
+     */
+	public function getFormatString()
+	{
+		return $this->formatString;
+	}
+	
+    /**
+     * Hydrate Element
+     *
+     * @param DOMNode $node Node
+     * @param Connection $connection Connection
+     *
+     */	
+	public function hydrate(\DOMNode $node)
+	{
+		$this->value = MetadataBase::getPropertyFromNode($node, 'Value', true);
+		$this->formatedValue = MetadataBase::getPropertyFromNode($node, 'FmtValue', true);
+		$this->formatString = MetadataBase::getPropertyFromNode($node, 'FormatString', true);
+	}
+	
+}
